@@ -1,0 +1,44 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<a href="profile/{{user.username}}">TODO</a>
+<div id="index_view">
+<div class="row">
+    {% if user.is_authenticated %}
+    <div id="compose-view">
+        <form id="compose-form">
+            <textarea maxlength="280" class="form-control" id="compose-body"
+                placeholder="What's on your mind?"></textarea>
+            <input id="submit" type="submit" value='Post' class="btn btn-primary" />
+        </form>
+    </div>
+    {% endif %}
+    </div>
+</div>
+
+<div id="profile_view">
+    <div class="row">
+    <div id="profile-view">
+        <div id="profile_card" class="card" style="width: 18rem;">
+
+            <div class="card-body">
+                <h5 class="card-title" id="username">UserName</h5>
+                <p class="card-text" id="userBio">This will be where the bio information will go</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" >Followers:<div id="profile_followers"> </div></li>
+                <li class="list-group-item" >Following:<div id="profile_following"> </div></li>
+            </ul>
+            <div class="card-body">
+                <button id="follow" class="btn btn-primary">Follow</button>
+                <button id="unfollow" class="btn btn-primary">Unfollow</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+{% endblock %}
