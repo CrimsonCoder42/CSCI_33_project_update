@@ -14,7 +14,11 @@ from .models import User, Post, Profile, Follow, Likes
 
 
 def index(request):
-    return render(request, "network/index.html")
+    allposts = get_post_page(1)
+    return render(request, "network/index.html", {
+        "posts": allposts,
+        "pages": "page"
+    })
 
 
 def login_view(request):
@@ -117,3 +121,8 @@ def create_post(request):
     newPost.save()
 
     return JsonResponse({"message": "saved successfully."}, status=201)
+
+
+def get_post_page(id):
+    postData = Post.objects.all().order_by('-timestamp')
+    return Paginator(postData, 10).page(id)

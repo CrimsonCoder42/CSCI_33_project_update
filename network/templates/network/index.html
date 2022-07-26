@@ -1,7 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-<a href="profile/{{user.username}}">TODO</a>
+
 <div id="index_view">
 <div class="row">
     {% if user.is_authenticated %}
@@ -14,7 +14,64 @@
     </div>
     {% endif %}
     </div>
+
+    <div class="row">
+    <div id="post-view">
+        <div class="row inbox-wrapper">
+            <div class="col-lg-12">
+                     <table class="table email-table no-wrap table-hover v-middle mb-0 font-14">
+                    <tbody id="archive_emails">
+                {% for item in posts %}
+                 <tr>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 email-aside border-lg-right">
+                                <div class="aside-content">
+                                    <div class="aside-header">
+                                    </div>
+                                    <a href="" id="{{ item.user }}" class="postMaker">{{ item.user }}</a>
+                                    <div id="dateTime" class="date">{{ item.timestamp }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="email-body-div">
+                        <textarea disabled class="form-control" id="post-body">{{ item.body }}</textarea>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <div class="email-attachments">
+                                <button data-index="{{ item.user }}" id="{{item.id}}" class="btn btn-success">
+                                    {% if item.id in liked_posts %}
+                                        Unlike: {{ item.like_count }}
+                                    {% else %}
+                                        Like: {{ item.like_count }}
+                                    {% endif %}
+                                </button>
+                        </div>
+                    {% endif %}
+                        {% if user.username == item.user  %}
+                            <button  class="btn btn-warning">
+                                    {% if item.id in liked_posts %}
+                                        Unlike: {{ item.like_count }}
+                                    {% else %}
+                                        Like: {{ item.like_count }}
+                                    {% endif %}
+                                </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </tr>
+            <br>
+            {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 <div id="profile_view">
     <div class="row">
