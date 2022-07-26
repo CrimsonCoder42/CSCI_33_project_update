@@ -135,11 +135,14 @@ def get_user_page(id, user):
 @login_required
 def user_profile(request, username):
 
-    personal_posts = get_user_page(1, username)
+    personal_posts = Post.objects.filter(username=username).order_by('-timestamp').values()
     profile_info = Profile.objects.filter(username=username).values()[0]
 
-    print(profile_info)
 
+    posts = []
+
+    for post in personal_posts:
+        posts.append(post)
 
     # liked = []
 
@@ -148,8 +151,5 @@ def user_profile(request, username):
     #     for i in post.liked_by.all():
     #         if request.user == i:
     #             liked.append(post.id)
-    return render(request, "network/index.html", {
-        "posts": personal_posts,
-        "profile_info": profile_info
-    })
+    return JsonResponse({"personal_posts": posts, "profile_info": profile_info}, status=201)
 

@@ -1,5 +1,6 @@
 textarea {
     background: white;
+    border: none;
 }
 
 .list-group-item{
@@ -63,4 +64,16 @@ textarea {
 
 #compose-body {
     margin-bottom: 10px;
+}
+
+.hide {
+ display: none;
+}
+
+.form-control {
+    background: white;
+    border: none;
+}
+.email-body-div {
+    width:100%
 }
