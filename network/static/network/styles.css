@@ -6,7 +6,11 @@ textarea {
     border-bottom: none;
 }
 
-
+.inbox-wrapper{
+    width: 80%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
 #compose-view{
     width: 70%;
     margin-top: 20px;

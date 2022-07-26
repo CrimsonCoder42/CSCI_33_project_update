@@ -126,3 +126,30 @@ def create_post(request):
 def get_post_page(id):
     postData = Post.objects.all().order_by('-timestamp')
     return Paginator(postData, 10).page(id)
+
+
+def get_user_page(id, user):
+    postData = Post.objects.filter(username=user).order_by('-timestamp')
+    return Paginator(postData, 10).page(id)
+
+@login_required
+def user_profile(request, username):
+
+    personal_posts = get_user_page(1, username)
+    profile_info = Profile.objects.filter(username=username).values()[0]
+
+    print(profile_info)
+
+
+    # liked = []
+
+    # isolate the liked posts.
+    # for post in personal_posts:
+    #     for i in post.liked_by.all():
+    #         if request.user == i:
+    #             liked.append(post.id)
+    return render(request, "network/index.html", {
+        "posts": personal_posts,
+        "profile_info": profile_info
+    })
+
